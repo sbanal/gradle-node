@@ -32,7 +32,6 @@ RUN which java
 RUN echo "JAVA_HOME:$JAVA_HOME"
 RUN echo "PATH:$PATH"
 RUN ls -l /usr
-#RUN chown -R gradle:gradle /usr/src/app
 
 ENV CHROME_BIN=/usr/bin/chromium-browser
 ENV CHROME_PATH=/usr/lib/chromium/
@@ -40,3 +39,4 @@ ENV CHROME_PATH=/usr/lib/chromium/
 USER gradle
 WORKDIR /workspace
 CMD ["gradle"]
+

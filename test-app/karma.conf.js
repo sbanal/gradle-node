@@ -2,7 +2,7 @@
 // https://karma-runner.github.io/1.0/config/configuration-file.html
 
 const process = require('process');
-process.env.CHROME_BIN = require('puppeteer').executablePath()
+//process.env.CHROME_BIN = require('puppeteer').executablePath()
 
 module.exports = function (config) {
   config.set({
@@ -27,7 +27,7 @@ module.exports = function (config) {
     },
     reporters: ['progress', 'kjhtml'],
     //listenAddress: process.env.LOCAL_IP,
-    hostname: process.env.LOCAL_IP,
+    //hostname: process.env.LOCAL_IP,
     port: 9876,
     colors: true,
     logLevel: config.LOG_DEBUG,
@@ -44,8 +44,8 @@ module.exports = function (config) {
 	  ]
 	}
     },*/
-    browsers: ['ChromeHeadless'],
-    /*browsers: ['Chrome_without_security'],
+    //browsers: ['ChromeHeadless'],
+    browsers: ['Chrome_without_security'],
     customLaunchers: {
 	    Chrome_without_security: {
 		base: 'ChromeHeadless',
@@ -57,7 +57,7 @@ module.exports = function (config) {
 			],
 		debug: true
 		},
-     }, */
+     },
      //concurrency: Infinity,	  
      singleRun: false
   });
