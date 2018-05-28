@@ -22,6 +22,32 @@ task build(type:Exec) {
   commandLine "${projectDir}/node_modules/@angular/cli/bin/ng", 'build'
 }
 
+def getIP() {
+    InetAddress result = null;
+    Enumeration<NetworkInterface> interfaces = NetworkInterface.getNetworkInterfaces();
+    while (interfaces.hasMoreElements()) {
+        Enumeration<InetAddress> addresses = interfaces.nextElement().getInetAddresses();
+        while (addresses.hasMoreElements()) {
+            InetAddress address = addresses.nextElement();
+            if (!address.isLoopbackAddress()) {
+                if (address.isSiteLocalAddress()) {
+                    return address.getHostAddress();
+                } else if (result == null) {
+                    result = address;
+                }
+            }
+        }
+    }
+    return (result != null ? result : InetAddress.getLocalHost()).getHostAddress();
+}
+
+def localIp = getIP()
+task test(type:Exec) {
+  println "IP: $localIp"
+  environment "LOCAL_IP", "$localIp"
+  commandLine "${projectDir}/node_modules/@angular/cli/bin/ng", 'test', '--watch=false'
+}
+
 task clean(type:Exec) {
   print "Deleting ${projectDir}/dist"
   commandLine "rm", "-rf", "${projectDir}/dist"
